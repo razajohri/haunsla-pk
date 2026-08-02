@@ -17,7 +17,7 @@ Agents: check items off when done; don’t invent parallel trackers.
 - [x] Expo app with tabs + onboarding + feed + detail + search + saved + profile
 - [x] React Query feed + Zustand prefs + theme
 - [x] Root docs: PRD, AGENTS, ARCHITECTURE, DECISION, TASKS
-- [ ] Create GitHub remote + first push (manual — owner)
+- [x] Create GitHub remote + first push → https://github.com/razajohri/haunsla-pk
 - [ ] Remove any secrets from working tree / rotate if leaked
 
 ---
