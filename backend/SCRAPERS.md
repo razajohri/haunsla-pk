@@ -14,6 +14,7 @@ Company lists live in config (edit anytime, re-run scrapers):
 
 | File | Purpose |
 |------|---------|
+| `config/career_pages.json` | **Direct company career pages** (ATS slug and/or `careers_url`) |
 | `config/pakistan_companies.json` | **257** employers in Lahore / Karachi / Islamabad — tech, business, marketing, finance, **banks** |
 | `config/worldwide_companies.json` | Worldwide remote-friendly ATS career boards |
 | `config/ats_companies.json` | Bulk Ashby / Greenhouse / Lever slugs |
@@ -26,6 +27,17 @@ Scrapes every enabled source → `jobs_cache.pkl` → Supabase upsert → link v
 
 ```bash
 .venv/bin/python scripts/update_jobs_cache.py
+```
+
+### Direct company career pages (recommended for quality apply links)
+
+```bash
+# All companies in config/career_pages.json (GitLab, 10Pearls, i2c, Tkxel, banks, …)
+.venv/bin/python scripts/scrape_career_pages.py
+
+# Faster smoke
+HAUNSLA_SCRAPE_QUICK=1 CAREER_PAGE_LIMIT=15 \
+  .venv/bin/python scripts/scrape_career_pages.py
 ```
 
 ### Pakistan-only employer pass (LHE / KHI / ISB + banks + grads)
@@ -51,6 +63,8 @@ HAUNSLA_SCRAPE_QUICK=1 PK_COMPANY_LIMIT=20 \
 | `SCRAPE_PAKISTAN_GOOGLE` | `1` | Google Jobs for PK fresh-grad / bank / city queries |
 | `ALLOW_PAKISTAN_LOCAL` | `1` | Keep Lahore/Karachi/Islamabad (not only remote) |
 | `SCRAPE_ENTRY_LEVEL` | `1` | Intern / junior / graduate terms on Indeed/LinkedIn/ATS |
+| `SCRAPE_CAREER_PAGES` | `1` | Direct career pages (`career_pages.json`) |
+| `CAREER_PAGE_LIMIT` | `0` | Cap companies for career-page scrape (`0` = all) |
 | `SCRAPE_CAREER_BOARDS` | `1` | `worldwide_companies.json` ATS boards |
 | `SCRAPE_ATS_BULK` | `1` | Large Ashby/GH/Lever slug lists |
 | `SCRAPE_REMOTE_BOARDS` | `1` | Jobicy, Himalayas, Arbeitnow (+ RemoteOK if enabled) |
@@ -81,6 +95,8 @@ HAUNSLA_SCRAPE_QUICK=1 PK_COMPANY_LIMIT=20 \
 
 | Module / script | Source |
 |-----------------|--------|
+| `career_page_scraper.py` | **Direct career pages** — ATS APIs + HTML/AJAX parsers |
+| `scripts/scrape_career_pages.py` | Career pages only → merge cache |
 | `pakistan_companies.py` | PK employers JSON + Indeed city/field + company + Google |
 | `career_boards.py` | Worldwide company ATS career pages |
 | `ats_scraper.py` + `ats_companies.py` | Bulk Ashby / Greenhouse / Lever |

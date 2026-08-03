@@ -57,6 +57,10 @@ LISTED_JOB_SITES = (
     "naukri",
     "repstack",
     "pakistan",
+    "career_page",
+    "career_greenhouse",
+    "career_ashby",
+    "career_lever",
 )
 WORLDWIDE_ONLY = os.getenv("WORLDWIDE_ONLY", "0") == "1"
 
@@ -426,7 +430,17 @@ def scrape_all(search_term: str = " ") -> pd.DataFrame:
         except Exception:
             logger.exception("Pakistan employers scrape failed")
 
-    # 1) Company → career page path (multi-ATS)
+    # 1) Direct company career pages (ATS detect + HTML parse)
+    if os.getenv("SCRAPE_CAREER_PAGES", "1") == "1":
+        try:
+            from career_page_scraper import scrape_direct_career_pages
+
+            logger.info("Scraping direct company career pages")
+            frames.append(scrape_direct_career_pages())
+        except Exception:
+            logger.exception("Direct career pages scrape failed")
+
+    # 1b) Worldwide company ATS career boards (slug list)
     if os.getenv("SCRAPE_CAREER_BOARDS", "1") == "1":
         try:
             from career_boards import scrape_worldwide_career_boards

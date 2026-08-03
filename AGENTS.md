@@ -55,6 +55,7 @@ Do **not** invent a second app structure. Extend what exists.
 | Scrapers (JobSpy pipeline) | `backend/scraper.py`, `ats_*.py`, `scripts/update_jobs_cache.py` |
 | Scraper runbook | `backend/SCRAPERS.md` |
 | PK employers (LHE/KHI/ISB + banks) | `backend/pakistan_companies.py`, `backend/config/pakistan_companies.json` |
+| Direct career pages | `backend/career_page_scraper.py`, `backend/config/career_pages.json` |
 | Legacy scrapers | `backend/app/scrapers/` (Remotive / WWR) |
 | PK / worldwide geo filter | `backend/ats_location.py` |
 | ATS company slugs | `backend/ats_companies.py`, `backend/config/ats_companies.json` |

@@ -227,6 +227,24 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 
 ---
 
+## ADR-014 — Direct company career-page scraping
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Aggregator dumps are noisy. Users and ads need real apply links from company career pages (GitLab, 10Pearls, i2c, Tkxel, banks, etc.).
+
+**Decision:**
+- Maintain `config/career_pages.json` with `careers_url` and optional `ats`/`slug`.
+- `career_page_scraper.py`: explicit ATS → detect Greenhouse/Ashby/Lever embeds → site parsers (e.g. i2c ajax) → HTML job-link parse (+ one hop).
+- Run via `scripts/scrape_career_pages.py` or `scrape_all` (`SCRAPE_CAREER_PAGES=1`).
+
+**Consequences:**
+- Some corporate portals (Workday/SAP/Oracle) need bespoke parsers over time.
+- Grow `career_pages.json` whenever a good careers URL is found.
+
+---
+
 ## Pending decisions (not yet ADR’d)
 
 - Employer portal framework (Next.js vs plain Flask templates)
@@ -235,4 +253,4 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 - Primary deploy target: Railway vs Render
 - App store legal entity / privacy policy hosting
 
-When these are chosen, add ADR-014+.
+When these are chosen, add ADR-015+.

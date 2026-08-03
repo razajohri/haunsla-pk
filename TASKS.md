@@ -45,6 +45,7 @@ Agents: check items off when done; don’t invent parallel trackers.
 - [x] Pakistan employer list (LHE/KHI/ISB) + banks/tech/biz/marketing/finance scraper (`pakistan_companies.json`)
 - [x] Scraper runbook (`backend/SCRAPERS.md`) for re-running all sources later
 - [x] Product dual path: remote ads for growth + internships/first jobs for PK fresh grads (onboarding + Search)
+- [x] Direct company career-page scraper (`career_page_scraper.py` + `config/career_pages.json`)
 - [ ] Optional: enable Bayt/Naukri (`SCRAPE_BAYT_NAUKRI=1`) and hiring.cafe
 
 ### Scraper priority
