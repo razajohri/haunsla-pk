@@ -8,13 +8,17 @@ Version 1.0 | August 2026
 ## 1. Overview
 
 ### Product Summary
-Haunsla is a mobile-first remote job discovery app for Pakistani job seekers. It combines a curated feed of remote-only job listings with a TikTok-style scroll UI, making job discovery fast, engaging, and relevant.
+Haunsla is a mobile-first job discovery app for Pakistani talent. **Growth hook = remote job ads** (worldwide + Pakistan-friendly). **Trust hook for fresh graduates = internships and first jobs** in Pakistan (Lahore / Karachi / Islamabad and remote), because many grads have FYP projects but no internship and no clear path into work.
 
 ### Problem
-Pakistani remote job seekers have no dedicated platform. Rozee.pk and Mustakbil are bloated with on-site, low-quality listings. LinkedIn is noisy and not Pakistan-optimized. There is no clean, mobile-first destination for Pakistanis looking for remote work from global and local employers.
+1. Pakistani remote job seekers have no dedicated, clean mobile destination — Rozee/Mustakbil are noisy; LinkedIn isn’t Pakistan-optimized.
+2. Fresh graduates struggle even harder: they finish university with an FYP, little or no internship, and no idea how to land a first role in tech, business, marketing, or finance (including banks).
 
 ### Solution
-A scroll-feed mobile app (Expo/React Native) that surfaces remote-friendly job listings filtered for Pakistani talent — clean cards, fast browsing, zero friction to apply.
+A scroll-feed mobile app (Expo/React Native) that:
+- Leads with **remote** listings to attract and retain users
+- Also surfaces **internships, trainee, and entry-level** roles (remote + Pakistan city) so fresh grads can apply without already having “2 years experience”
+- Keeps apply as a deep link — low friction, no fake ATS for MVP
 
 ### Platform
 | Layer | Choice |
@@ -43,17 +47,22 @@ A scroll-feed mobile app (Expo/React Native) that surfaces remote-friendly job l
 
 ## 3. Target Users
 
-### Primary — Job Seeker
+### Primary — Remote job seeker (growth)
 - Pakistani, aged 20–35
-- Tech, design, marketing, customer support, writing backgrounds
-- Looking for remote work: international companies or Pakistani remote-first employers
-- Phone-first, low tolerance for clunky UX
-- Currently using LinkedIn, Rozee, or Upwork
+- Tech, design, marketing, support, writing, finance
+- Wants remote work from global or Pakistan-friendly employers
+- Discovers Haunsla via remote job ads / social
+
+### Primary — Fresh graduate (retention & mission)
+- Final-year / just graduated; often has an FYP but **no internship**
+- Looking for internship, trainee, junior, or first full-time role in Pakistan or remote
+- Fields: tech, business, marketing, finance, banking
+- Needs a simple “where do I start?” path — not a noisy board
 
 ### Secondary — Employer / Recruiter
-- Pakistani startups hiring remotely
+- Pakistani startups hiring remotely or in LHE/KHI/ISB
+- Banks / corporates with graduate trainee programs
 - International companies open to Pakistani talent
-- Recruiters posting on behalf of clients
 
 ---
 
@@ -75,7 +84,8 @@ A scroll-feed mobile app (Expo/React Native) that surfaces remote-friendly job l
 
 ### 4.3 Search & Filters
 - Keyword search
-- Filters: Category, Experience level, Job type, Salary range, Date posted
+- Filters: Category, Experience level (**internship**, entry, mid, senior), Job type, Salary range, Date posted
+- Onboarding path: Remote · Internships · First job — sets experience filter for fresh grads
 
 ### 4.4 Auth & Profiles
 - Email + password signup

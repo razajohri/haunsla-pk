@@ -1,5 +1,7 @@
 # Haunsla scrapers — how to run them later
 
+**Product intent:** Run **remote job ads** to grow the app. Still scrape **internships / trainee / first jobs** (Pakistan cities + remote) so fresh graduates who only have an FYP can find a starting role.
+
 All commands run from `backend/` with the venv active:
 
 ```bash

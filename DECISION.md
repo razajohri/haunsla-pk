@@ -208,6 +208,25 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 
 ---
 
+## ADR-013 — Remote ads for growth; internships for Pakistan grads
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Haunsla will mostly run **remote job ads** to acquire users. Many of those users — especially fresh graduates — also need normal/local roles: they have FYP projects, rarely have internships, and don’t know how to get a first job in tech/business/marketing/finance.
+
+**Decision:**
+- Keep **remote-first** as the brand and acquisition story (*Remote jobs. Real ambition.*).
+- Keep scraping + filters for **internships / entry / trainee** and Pakistan city employers (ADR-011, ADR-012) so grads can find first steps without prior experience.
+- Onboarding lets seekers pick Remote / Internships / First job so the feed isn’t only senior remote roles.
+- Employer ads stay remote-heavy for monetization; seeker value includes local graduate discovery.
+
+**Consequences:**
+- Feed is mixed (remote + PK local) when `ALLOW_PAKISTAN_LOCAL=1`; Search chips + onboarding path keep UX clear.
+- Do not turn Haunsla into a full Rozee clone — remote remains the hero; internships/first jobs are the fresh-grad lane.
+
+---
+
 ## Pending decisions (not yet ADR’d)
 
 - Employer portal framework (Next.js vs plain Flask templates)
@@ -216,4 +235,4 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 - Primary deploy target: Railway vs Render
 - App store legal entity / privacy policy hosting
 
-When these are chosen, add ADR-013+.
+When these are chosen, add ADR-014+.
