@@ -61,14 +61,28 @@ def _build_source_key(
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
+def _clean_str(value: Any, default: str = "") -> str:
+    if value is None:
+        return default
+    try:
+        if pd.isna(value):
+            return default
+    except (TypeError, ValueError):
+        pass
+    text = str(value).strip()
+    if not text or text.lower() == "nan":
+        return default
+    return text
+
+
 def build_job_record(row: dict[str, Any] | pd.Series) -> dict[str, Any] | None:
-    site = str(row.get("site") or "unknown").lower()
-    job_url_direct = row.get("job_url_direct") or None
-    job_url = row.get("job_url") or job_url_direct
+    site = _clean_str(row.get("site"), "unknown").lower()
+    job_url_direct = _clean_str(row.get("job_url_direct")) or None
+    job_url = _clean_str(row.get("job_url")) or job_url_direct
     if not job_url:
         return None
-    title = (row.get("title") or "").strip() or "Untitled"
-    company = (row.get("company") or "").strip() or "Unknown"
+    title = _clean_str(row.get("title"), "Untitled") or "Untitled"
+    company = _clean_str(row.get("company"), "Unknown") or "Unknown"
     url_for_key = str(job_url_direct or job_url)
     source_key = _build_source_key(site, url_for_key, title, company)
 
