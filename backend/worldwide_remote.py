@@ -94,15 +94,10 @@ def is_country_locked_remote(row: dict[str, Any] | pd.Series) -> bool:
         flags=re.I,
     ):
         return True
-    if COUNTRY_LOCKED_LOCATION.search(loc) and not has_worldwide_signal(
-        {**dict(row), "location": "Worldwide"}  # ignore loc when checking signal
-        if hasattr(row, "keys")
-        else row
-    ):
-        # If location names a country/region, treat as locked unless description
-        # clearly says worldwide/anywhere.
-        text = _text(row)
-        if not any(token in text for token in WORLDWIDE_TOKENS):
+    # Location names a country/region → locked unless description is explicitly worldwide
+    if COUNTRY_LOCKED_LOCATION.search(loc):
+        desc = str(row.get("description") or "").lower()
+        if not any(token in desc for token in WORLDWIDE_TOKENS):
             return True
     return False
 
