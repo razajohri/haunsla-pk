@@ -37,7 +37,7 @@ Agents: check items off when done; don’t invent parallel trackers.
 - [x] Grow ATS company slug lists in `config/ats_companies.json` (bulk remote-friendly seed)
 - [ ] Deploy API to Railway or Render
 - [ ] Health check + scrape webhook secured with secret
-- [~] Bulk scrape toward ≥ 10k remote jobs (cache locally; sync when Supabase keys present)
+- [x] Bulk scrape toward ≥ 10k remote jobs — **16,112** in `jobs_cache.pkl` / local SQLite (sync to Supabase when keys present)
 - [ ] Optional: enable Bayt/Naukri (`SCRAPE_BAYT_NAUKRI=1`) and hiring.cafe
 
 ### Scraper priority
