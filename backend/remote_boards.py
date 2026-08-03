@@ -81,15 +81,16 @@ def scrape_remoteok() -> pd.DataFrame:
     for item in payload:
         if not isinstance(item, dict):
             continue
-        # First payload row is legal/meta; real jobs have numeric ids + company.
+        # First payload row is legal/meta; real jobs have numeric ids + company + tags.
         if not item.get("id") or not item.get("company") or not item.get("position"):
+            continue
+        if not item.get("epoch") or not isinstance(item.get("tags"), list) or not item.get("tags"):
             continue
         apply_url = item.get("apply_url") or item.get("url") or ""
         if apply_url and apply_url.startswith("/"):
             apply_url = f"https://remoteok.com{apply_url}"
-        if not apply_url or "remoteok.com" not in apply_url and not apply_url.startswith("http"):
+        if not apply_url or not str(apply_url).startswith("http"):
             continue
-        # Skip obvious non-job spam rows
         title = str(item.get("position") or "")
         if len(title) < 3 or title.lower() in {"menu", "compatibility"}:
             continue

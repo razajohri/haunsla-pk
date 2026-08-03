@@ -42,7 +42,9 @@ COUNTRY_LOCKED_LOCATION = re.compile(
     r"canada|australia|germany|france|india|brazil|mexico|"
     r"netherlands|ireland|spain|italy|sweden|norway|denmark|"
     r"switzerland|poland|estonia|colombia|argentina|japan|"
-    r"uae|singapore|north america|emea|apac|latam|americas|\bamer\b"
+    r"uae|united arab emirates|saudi arabia|ksa|singapore|"
+    r"north america|emea|apac|latam|americas|\bamer\b|mena|meta|"
+    r"washington|bangalore|bengaluru|pakistan|india"
     r")\b",
     flags=re.I,
 )
@@ -89,12 +91,26 @@ def is_country_locked_remote(row: dict[str, Any] | pd.Series) -> bool:
     return False
 
 
+# Boards that primarily list worldwide / any-country remote roles.
+WORLDWIDE_NATIVE_SITES = {
+    "remoteok",
+    "jobicy",
+    "himalayas",
+    "remotive",
+    "weworkremotely",
+    "arbeitnow",
+}
+
+
 def is_worldwide_remote_row(row: dict[str, Any] | pd.Series) -> bool:
     """Keep true worldwide / any-country remote jobs."""
     if not bool(row.get("is_remote")) and "remote" not in _text(row):
         return False
     if is_country_locked_remote(row):
         return False
+    site = str(row.get("site") or "").lower()
+    if site in WORLDWIDE_NATIVE_SITES:
+        return True
     return has_worldwide_signal(row)
 
 
