@@ -12,6 +12,17 @@ class Job(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     external_id = db.Column(db.String(255), unique=True, index=True)
+    # JobSpy / Canada pipeline fields
+    source_key = db.Column(db.String(64), unique=True, index=True)
+    site = db.Column(db.String(64), index=True)
+    location = db.Column(db.String(255))
+    job_url = db.Column(db.String(1024))
+    job_url_direct = db.Column(db.String(1024))
+    compensation = db.Column(db.String(255))
+    pay_interval = db.Column(db.String(64))
+    is_active = db.Column(db.Boolean, default=True, index=True)
+    raw_payload = db.Column(db.JSON, default=dict)
+
     title = db.Column(db.String(255), nullable=False, index=True)
     company = db.Column(db.String(255), nullable=False, index=True)
     company_logo = db.Column(db.String(512))
@@ -38,11 +49,13 @@ class Job(db.Model):
     def to_dict(self, include_description: bool = False) -> dict:
         data = {
             "id": self.id,
-            "external_id": self.external_id,
+            "external_id": self.external_id or self.source_key,
             "title": self.title,
             "company": self.company,
             "company_logo": self.company_logo,
-            "apply_url": self.apply_url,
+            "apply_url": self.apply_url
+            or self.job_url_direct
+            or self.job_url,
             "category": self.category,
             "experience_level": self.experience_level,
             "job_type": self.job_type,
@@ -50,13 +63,15 @@ class Job(db.Model):
             "salary_max": self.salary_max,
             "salary_currency": self.salary_currency,
             "tags": self.tags or [],
-            "source": self.source,
+            "source": self.source or self.site,
             "is_remote": self.is_remote,
             "pakistan_friendly": self.pakistan_friendly,
             "haunsla_score": self.haunsla_score,
             "is_featured": self.is_featured,
             "posted_at": self.posted_at.isoformat() if self.posted_at else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,
+            "location": self.location,
+            "is_active": self.is_active if self.is_active is not None else True,
         }
         if include_description:
             data["description"] = self.description

@@ -50,9 +50,12 @@ Do **not** invent a second app structure. Extend what exists.
 
 | Goal | Primary location |
 |------|------------------|
-| Job feed API / filters | `backend/app/routes/jobs.py` |
-| DB models / schema | `backend/app/models/`, `backend/migrations/` |
-| Scrapers | `backend/app/scrapers/` |
+| Job feed API / filters | `backend/app/routes/jobs.py`, `backend/data_store.py` |
+| DB models / schema | `backend/app/models/`, `backend/migrations/`, `backend/db/schema.sql` |
+| Scrapers (JobSpy pipeline) | `backend/scraper.py`, `ats_*.py`, `scripts/update_jobs_cache.py` |
+| Legacy scrapers | `backend/app/scrapers/` (Remotive / WWR) |
+| PK / worldwide geo filter | `backend/ats_location.py` |
+| ATS company slugs | `backend/ats_companies.py`, `backend/config/ats_companies.json` |
 | Demo / seed data | `backend/app/services/seed.py` |
 | Feed UI | `mobile/src/screens/FeedScreen.tsx`, `JobCard.tsx` |
 | Navigation | `mobile/src/navigation/` |

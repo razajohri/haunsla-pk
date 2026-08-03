@@ -20,6 +20,11 @@ build/
 *.sqlite3
 instance/
 
+# JobSpy pipeline cache
+backend/jobs_cache.pkl
+backend/jobs_cache.pkl.tmp
+*.pkl.tmp
+
 # Expo / React Native
 mobile/.expo/
 mobile/dist/

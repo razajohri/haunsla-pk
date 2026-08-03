@@ -149,6 +149,27 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 
 ---
 
+## ADR-010 — JobSpy scrape → pickle → Supabase pipeline (from remotejobscanada.ca)
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Haunsla needs the same job supply stack as remotejobscanada.ca: JobSpy aggregators, ATS board scrapes, atomic pickle cache, chunked Supabase upsert on `source_key`, and dead-link soft-deactivation. Geography must be Pakistan + open international remote (looser than Canada).
+
+**Decision:**
+- Port the Canada playbook into `backend/` (`scraper.py`, `ats_location.py`, `ats_companies.py`, `data_store.py`, `scripts/*`, `db/schema.sql`).
+- Use `python-jobspy` for Indeed/Google/(optional Bayt/Naukri). Implement Ashby/Greenhouse/Lever via public board APIs (`ats_scraper.py`) because public JobSpy lacks those boards.
+- Keep Remotive/WWR as additional sources mapped into the same DataFrame shape.
+- Upsert on `source_key`; serve Supabase first, then `jobs_cache.pkl`; map rows to the existing mobile JSON shape.
+- Pakistan filter lives in `ats_location.is_pakistan_job_row` (reject US/EU-only; allow PK + worldwide/anywhere remote).
+
+**Consequences:**
+- Scrape ops are script-driven (`update_jobs_cache.py`) plus `POST /api/jobs/scrape`.
+- Company coverage for ATS depends on `ats_companies.py` + `config/ats_companies.json` — grow the slug lists over time.
+- Cross-source dedupe remains URL/`source_key` based (same job on two boards may still appear twice).
+
+---
+
 ## Pending decisions (not yet ADR’d)
 
 - Employer portal framework (Next.js vs plain Flask templates)
@@ -157,4 +178,4 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 - Primary deploy target: Railway vs Render
 - App store legal entity / privacy policy hosting
 
-When these are chosen, add ADR-010+.
+When these are chosen, add ADR-011+.

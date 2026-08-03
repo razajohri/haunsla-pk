@@ -61,15 +61,33 @@ backend/
 
 ### Request flow
 1. Client hits `/api/jobs?...`
-2. Route builds SQLAlchemy query (remote-only + filters)
-3. Featured jobs ordered first, then `posted_at DESC`
-4. Paginated JSON returned
+2. If pipeline store is enabled: Supabase `jobs` first, then `jobs_cache.pkl`
+3. Else SQLAlchemy query (remote-only + filters; featured first)
+4. Paginated JSON returned in the mobile `items` shape
 
-### Scraper flow
-1. `POST /api/jobs/scrape` or scheduled job calls `run_all_scrapers()`
-2. Each scraper returns `ScrapedJob` dataclasses
-3. Upsert by `external_id`
-4. Commit per source; errors isolated per scraper
+### Scraper flow (JobSpy pipeline — primary)
+```
+scrape_all()  [scraper.py]
+  ├─ ATS: Ashby / Greenhouse / Lever  (ats_scraper.py + company slugs)
+  ├─ Indeed (PK remote + optional US remote → PK/worldwide filter)
+  ├─ Google Jobs ("remote jobs Pakistan" / worldwide)
+  ├─ Remotive / We Work Remotely (legacy boards, same row shape)
+  └─ hiring.cafe (optional, SCRAPE_HIRING_CAFE=1)
+         ↓
+  ats_location.py filter + URL dedupe
+         ↓
+  jobs_cache.pkl  (atomic write)
+         ↓
+  dataframe_to_job_records() → upsert_jobs() → public.jobs (source_key)
+         ↓
+  validate_job_links.py (soft-deactivate dead URLs)
+```
+
+Commands (from `backend/`):
+- `python scripts/update_jobs_cache.py` — full refresh
+- `python scripts/sync_jobs_to_supabase.py` — pickle → Supabase only
+- `python scripts/validate_job_links.py --workers 12 --prune-unknown-aggregators`
+- `POST /api/jobs/scrape` — same pipeline via API (`{"legacy": true}` for Remotive/WWR-only)
 
 ### Auth model (current → target)
 | Phase | Approach |
@@ -83,11 +101,16 @@ backend/
 
 ```
 jobs
-  id, external_id, title, company, description, apply_url
-  category, experience_level, job_type
-  salary_min/max/currency, tags[], source
-  is_remote, pakistan_friendly, is_featured, haunsla_score
-  posted_at, created_at, updated_at
+  id, source_key (unique), site, title, company, location, description
+  job_url / job_url_direct, apply_url, compensation, interval
+  min_amount / max_amount / currency, job_type
+  date_posted, is_active, is_remote, raw_payload
+  # Haunsla extras:
+  external_id, category, experience_level, tags[], pakistan_friendly
+  is_featured, haunsla_score, posted_at, created_at, updated_at
+
+scrape_runs
+  id, status, jobs_seen, message, created_at
 
 user_profiles
   auth_user_id (Supabase UUID), email, skills[], preferred_categories[]
@@ -103,8 +126,11 @@ employer_listings
   payment_provider, payment_status, active_until
 ```
 
-Local: SQLite file via SQLAlchemy `create_all()`.  
-Prod: Supabase Postgres — apply `backend/migrations/001_initial.sql`.
+Greenfield Supabase: apply `backend/db/schema.sql`.  
+Existing DB: also `backend/migrations/002_jobspy_pipeline.sql`.
+
+Local: SQLite file via SQLAlchemy `create_all()` + optional `jobs_cache.pkl`.  
+Prod: Supabase Postgres — apply `backend/db/schema.sql` (or 001 + 002 migrations).
 
 ---
 
