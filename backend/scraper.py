@@ -56,6 +56,7 @@ LISTED_JOB_SITES = (
     "bayt",
     "naukri",
     "repstack",
+    "pakistan",
 )
 WORLDWIDE_ONLY = os.getenv("WORLDWIDE_ONLY", "0") == "1"
 
@@ -405,6 +406,7 @@ def scrape_all(search_term: str = " ") -> pd.DataFrame:
     """Full refresh scrape used by scripts/update_jobs_cache.py.
 
     Diversified sources:
+    - Pakistan employers (Lahore / Karachi / Islamabad) — banks, tech, business, marketing, finance
     - Company career boards (Ashby/GH/Lever from worldwide_companies.json)
     - Remote aggregators (RemoteOK, Jobicy, Arbeitnow, Himalayas)
     - Remotive + multi-category We Work Remotely
@@ -413,6 +415,16 @@ def scrape_all(search_term: str = " ") -> pd.DataFrame:
     """
     del search_term  # Canada API accepted a dummy term; unused here
     frames: list[pd.DataFrame] = []
+
+    # 0) Pakistan city employers + graduate field / bank searches
+    if os.getenv("SCRAPE_PAKISTAN_COMPANIES", "1") == "1":
+        try:
+            from pakistan_companies import scrape_pakistan_employers
+
+            logger.info("Scraping Pakistan employers (LHE/KHI/ISB + banks)")
+            frames.append(scrape_pakistan_employers())
+        except Exception:
+            logger.exception("Pakistan employers scrape failed")
 
     # 1) Company → career page path (multi-ATS)
     if os.getenv("SCRAPE_CAREER_BOARDS", "1") == "1":

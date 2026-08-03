@@ -2,15 +2,37 @@
 
 Policy (Haunsla):
 - If a board marks a role remote (`is_remote=True` or clear remote location), keep it.
-- Only drop clear hard blocks (US-only / EU-only / must-reside-in-X).
+- Keep Pakistan city / local employer roles (Lahore, Karachi, Islamabad, etc.)
+  when ALLOW_PAKISTAN_LOCAL=1 (default) — needed for banks & graduate programs.
+- Only drop clear hard blocks (US-only / EU-only / must-reside-in-X) for non-PK rows.
 """
 
 from __future__ import annotations
 
+import os
 import re
 from typing import Any
 
 import pandas as pd
+
+ALLOW_PAKISTAN_LOCAL = os.getenv("ALLOW_PAKISTAN_LOCAL", "1") == "1"
+
+PAKISTAN_LOCAL_TOKENS = (
+    "pakistan",
+    "lahore",
+    "karachi",
+    "islamabad",
+    "rawalpindi",
+    "peshawar",
+    "faisalabad",
+    "multan",
+    "gujranwala",
+    "hyderabad",
+    "sialkot",
+    "quetta",
+    ", pk",
+    " pk ",
+)
 
 REMOTE_TOKENS = (
     "remote",
@@ -84,11 +106,19 @@ def is_geo_blocked(text: str) -> bool:
     return False
 
 
+def is_pakistan_local_row(row: dict[str, Any] | pd.Series) -> bool:
+    text = _blob(row)
+    return any(token in text for token in PAKISTAN_LOCAL_TOKENS)
+
+
 def is_pakistan_job_row(row: dict[str, Any] | pd.Series) -> bool:
-    """Keep board-remote jobs unless they are explicitly geo-blocked."""
+    """Keep remote (non-geo-blocked) or Pakistan-local employer roles."""
+    text = _blob(row)
+    local = ALLOW_PAKISTAN_LOCAL and is_pakistan_local_row(row)
+    if local:
+        return True
     if not has_remote_signal(row):
         return False
-    text = _blob(row)
     if is_geo_blocked(text):
         return False
     return True

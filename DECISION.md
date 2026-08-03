@@ -189,6 +189,25 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 
 ---
 
+## ADR-012 — Pakistan city employer list (LHE / KHI / ISB)
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Fresh graduates need roles from major employers in Lahore, Karachi, and Islamabad — including banks and graduate trainee programs — not only worldwide remote boards. Many PK employers lack public Greenhouse/Ashby/Lever boards.
+
+**Decision:**
+- Maintain `config/pakistan_companies.json` (200+ employers across tech, business, marketing, finance, banks).
+- Scrape via Indeed/Google city×field and per-company graduate/intern/trainee queries (`pakistan_companies.py`), plus ATS when `ats`+`slug` exist.
+- Default `ALLOW_PAKISTAN_LOCAL=1` so on-site/hybrid PK city jobs are kept alongside remote.
+- Document all toggles in `backend/SCRAPERS.md` for re-runs.
+
+**Consequences:**
+- Full company pass is Indeed-heavy; use `PK_COMPANY_LIMIT` / `HAUNSLA_SCRAPE_QUICK` for shorter runs.
+- Grow the JSON over time; optional ATS slugs improve direct career-page coverage.
+
+---
+
 ## Pending decisions (not yet ADR’d)
 
 - Employer portal framework (Next.js vs plain Flask templates)
@@ -197,4 +216,4 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 - Primary deploy target: Railway vs Render
 - App store legal entity / privacy policy hosting
 
-When these are chosen, add ADR-012+.
+When these are chosen, add ADR-013+.

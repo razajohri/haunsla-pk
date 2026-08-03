@@ -1,0 +1,2793 @@
+{
+  "_comment": "Major employers in Lahore / Karachi / Islamabad for Haunsla graduate discovery (tech, business, marketing, finance, banks). Optional ats+slug for Greenhouse/Ashby/Lever; otherwise scraped via Indeed/Google company+city queries.",
+  "cities": [
+    "Lahore",
+    "Karachi",
+    "Islamabad"
+  ],
+  "graduate_fields": [
+    "tech",
+    "business",
+    "marketing",
+    "finance",
+    "banking"
+  ],
+  "companies": [
+    {
+      "name": "Habib Bank Limited",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "United Bank Limited",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "MCB Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Allied Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Meezan Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Bank Alfalah",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "National Bank of Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Bank of Punjab",
+      "cities": [
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Faysal Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Askari Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "JS Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Habib Metropolitan Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Standard Chartered Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Soneri Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Samba Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Dubai Islamic Bank Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Silkbank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Summit Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "First Women Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Industrial and Commercial Bank of China Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "BankIslami Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Al Baraka Bank Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "The Bank of Khyber",
+      "cities": [
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Punjab Provincial Cooperative Bank",
+      "cities": [
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Khushhali Microfinance Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Telenor Microfinance Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "U Microfinance Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "Mobilink Microfinance Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "NRSP Microfinance Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "FINCA Microfinance Bank",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking",
+        "business"
+      ]
+    },
+    {
+      "name": "JazzCash",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "fintech",
+        "tech"
+      ]
+    },
+    {
+      "name": "Easypaisa",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "fintech",
+        "tech"
+      ]
+    },
+    {
+      "name": "SadaPay",
+      "cities": [
+        "Karachi",
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "fintech",
+        "tech"
+      ]
+    },
+    {
+      "name": "NayaPay",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "finance",
+        "fintech"
+      ]
+    },
+    {
+      "name": "Finja",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "finance",
+        "fintech",
+        "tech"
+      ]
+    },
+    {
+      "name": "Keenu",
+      "cities": [
+        "Lahore",
+        "Karachi"
+      ],
+      "sectors": [
+        "finance",
+        "fintech"
+      ]
+    },
+    {
+      "name": "PayPro",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "finance",
+        "fintech"
+      ]
+    },
+    {
+      "name": "Bykea",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Bazaar Technologies",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "fintech",
+        "business"
+      ]
+    },
+    {
+      "name": "Abhi",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "fintech",
+        "finance"
+      ]
+    },
+    {
+      "name": "Tag",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "fintech",
+        "tech"
+      ]
+    },
+    {
+      "name": "CreditBook",
+      "cities": [
+        "Lahore",
+        "Karachi"
+      ],
+      "sectors": [
+        "fintech",
+        "tech"
+      ]
+    },
+    {
+      "name": "State Life Insurance",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "business"
+      ]
+    },
+    {
+      "name": "EFU Life",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "finance",
+        "business"
+      ]
+    },
+    {
+      "name": "Jubilee Life Insurance",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "finance",
+        "business"
+      ]
+    },
+    {
+      "name": "Adamjee Insurance",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "finance",
+        "business"
+      ]
+    },
+    {
+      "name": "IGI Life",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "finance"
+      ]
+    },
+    {
+      "name": "Pak Qatar Family Takaful",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "finance"
+      ]
+    },
+    {
+      "name": "Central Depository Company",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "finance"
+      ]
+    },
+    {
+      "name": "Pakistan Stock Exchange",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "finance",
+        "business"
+      ]
+    },
+    {
+      "name": "National Clearing Company of Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "finance"
+      ]
+    },
+    {
+      "name": "SECP",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "business"
+      ]
+    },
+    {
+      "name": "State Bank of Pakistan",
+      "cities": [
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "finance",
+        "banking"
+      ]
+    },
+    {
+      "name": "Systems Limited",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "NetSol Technologies",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "finance"
+      ]
+    },
+    {
+      "name": "TRG Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Ibex",
+      "cities": [
+        "Karachi",
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Arbisoft",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "10Pearls",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Inbox Business Technologies",
+      "cities": [
+        "Islamabad",
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Techlogix",
+      "cities": [
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "finance"
+      ]
+    },
+    {
+      "name": "Tkxel",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Cubix",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Nextbridge",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "VentureDive",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Arpatech",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Ovex Technologies",
+      "cities": [
+        "Islamabad",
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Folio3",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Confiz",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Avanza Solutions",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "finance"
+      ]
+    },
+    {
+      "name": "i2c Inc",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "fintech"
+      ]
+    },
+    {
+      "name": "CureMD",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Devsinc",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "JBS Global",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "ESketchers",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Folio3 Software",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Tintash",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Emumba",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Programmers Force",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Contour Software",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "NorthBay Solutions",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Kualitatem",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "DPL",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Folio3 Games",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Gameview Studios",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Mindstorm Studios",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Elision Technologies",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Softoo",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Hazel Mobile",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Techloyce",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "PureLogics",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Tekrevol",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Codeupscale",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Dubizzle Labs",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Zameen.com",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "PakWheels",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Rozee.pk",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Mustakbil",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "BrightSpyre",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Sastaticket",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Airlift Technologies",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Swich",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Retailo",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "GharPar",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Foodpanda Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Daraz",
+      "cities": [
+        "Karachi",
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Careem Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Uber Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Yayvo",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Tez Financial Services",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "fintech",
+        "tech"
+      ]
+    },
+    {
+      "name": "TPS Worldwide",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "finance"
+      ]
+    },
+    {
+      "name": "1Link",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "finance"
+      ]
+    },
+    {
+      "name": "NIFT",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "finance"
+      ]
+    },
+    {
+      "name": "KeepTruckin",
+      "cities": [
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ],
+      "aliases": [
+        "Motive",
+        "KeepTruckin Pakistan"
+      ]
+    },
+    {
+      "name": "Motive",
+      "cities": [
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Afiniti",
+      "cities": [
+        "Islamabad",
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Trax Technologies",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Softpyramid",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Techverx",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Spillbox",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Eziline Software House",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Cyber Internet Services",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Orcalo Holdings",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Gaditek",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Folio3 Soft",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Tintash Games",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Coderatory",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Zigron",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Xavor",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Netsolace",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Folio3x",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Software Productivity Strategists",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "SPS",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "LMKT",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "NCR Corporation Pakistan",
+      "cities": [
+        "Islamabad",
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Oracle Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "IBM Pakistan",
+      "cities": [
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Microsoft Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "SAP Pakistan",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Cisco Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Dell Technologies Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "HP Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Huawei Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Ericsson Pakistan",
+      "cities": [
+        "Islamabad",
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Nokia Pakistan",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Siemens Pakistan",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Accenture Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "TCS IT",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Wipro Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Infosys Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "HCLTech Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Cognizant Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Capgemini Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Jazz",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Telenor Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Zong",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Ufone",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "PTCL",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Nayatel",
+      "cities": [
+        "Islamabad",
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "StormFiber",
+      "cities": [
+        "Lahore",
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Transworld Associates",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Multinet",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Deloitte Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "PwC Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "KPMG Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "EY Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "A.F. Ferguson & Co",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "Yousuf Adil",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "A. F. Ferguson",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "Grant Thornton Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "BDO Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "RSM Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "McKinsey Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "Boston Consulting Group Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "Bain & Company Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "Oliver Wyman Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "finance",
+        "tech"
+      ]
+    },
+    {
+      "name": "GroupM Pakistan",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Ogilvy Pakistan",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "BBDO Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "JWT Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Interflow Communications",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Orient McCann",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Spectrum Communications",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Manhattan Communications",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Adcom Leo Burnett",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "BluO",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Creative Chaos",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Mangobaaz",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Jovago",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "ProPakistani",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Dawn Media Group",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Jang Group",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Hum Network",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Geo TV",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "ARY Digital",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "marketing",
+        "business"
+      ]
+    },
+    {
+      "name": "Unilever Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Nestle Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Procter & Gamble Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Coca-Cola Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "PepsiCo Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Engro Corporation",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Engro Foods",
+      "cities": [
+        "Karachi",
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Packages Limited",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Lucky Cement",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "DG Khan Cement",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Fauji Fertilizer",
+      "cities": [
+        "Islamabad",
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Pakistan State Oil",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Shell Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Total Parco",
+      "cities": [
+        "Lahore",
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Attock Petroleum",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Pakistan Tobacco Company",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Philip Morris Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Colgate-Palmolive Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Reckitt Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "GSK Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Getz Pharma",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Hilton Pharma",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Martin Dow",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Searle Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Abbott Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Pfizer Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Sanofi Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "L'Oreal Pakistan",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Indigo Textile",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Gul Ahmed",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Nishat Mills",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Interloop",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Style Textile",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Sapphire Textile",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Service Industries",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Atlas Honda",
+      "cities": [
+        "Lahore",
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Indus Motors",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Pak Suzuki",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Honda Atlas Cars",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "Toyota Indus",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "K-Electric",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "LESCO",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "IESCO",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "SSGC",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "SNGPL",
+      "cities": [
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "business",
+        "marketing",
+        "finance"
+      ]
+    },
+    {
+      "name": "RepStack",
+      "cities": [
+        "Lahore",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business"
+      ]
+    },
+    {
+      "name": "Lumenalta",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Folio",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Andela Pakistan",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Turing",
+      "cities": [
+        "Lahore",
+        "Islamabad",
+        "Karachi"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Toptal",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Arc.dev",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Brainx",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "DevsLane",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "Kodex Technologies",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech"
+      ]
+    },
+    {
+      "name": "LUMS",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "IBA Karachi",
+      "cities": [
+        "Karachi"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "NUST",
+      "cities": [
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "FAST-NUCES",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Coursera Pakistan",
+      "cities": [
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Nearpeer",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    },
+    {
+      "name": "Educative",
+      "cities": [
+        "Lahore"
+      ],
+      "sectors": [
+        "tech",
+        "business",
+        "marketing"
+      ]
+    }
+  ]
+}
