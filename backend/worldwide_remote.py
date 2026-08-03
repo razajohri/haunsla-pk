@@ -44,7 +44,7 @@ COUNTRY_LOCKED_LOCATION = re.compile(
     r"switzerland|poland|estonia|colombia|argentina|japan|"
     r"uae|united arab emirates|saudi arabia|ksa|singapore|"
     r"north america|emea|apac|latam|americas|\bamer\b|mena|meta|"
-    r"washington|bangalore|bengaluru|pakistan|india"
+    r"washington|bangalore|bengaluru|india"
     r")\b",
     flags=re.I,
 )
@@ -126,13 +126,17 @@ WORLDWIDE_NATIVE_SITES = {
 
 
 def is_worldwide_remote_row(row: dict[str, Any] | pd.Series) -> bool:
-    """Keep true worldwide / any-country remote jobs."""
+    """Keep worldwide / any-country remote jobs (plus Pakistan-open roles)."""
     if not bool(row.get("is_remote")) and "remote" not in _text(row):
         return False
+    loc = str(row.get("location") or "").lower()
+    # Haunsla also keeps explicit Pakistan remote roles
+    if "pakistan" in loc:
+        return True
     if is_country_locked_remote(row):
         return False
     site = str(row.get("site") or "").lower()
-    if site in WORLDWIDE_NATIVE_SITES:
+    if site in WORLDWIDE_NATIVE_SITES or site == "repstack":
         return True
     return has_worldwide_signal(row)
 
