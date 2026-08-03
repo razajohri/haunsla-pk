@@ -86,8 +86,24 @@ def is_country_locked_remote(row: dict[str, Any] | pd.Series) -> bool:
     blob = f"{title} {loc}"
     if REMOTE_US_STYLE.search(blob):
         return True
-    if COUNTRY_LOCKED_LOCATION.search(loc) and not has_worldwide_signal(row):
+    # Title region locks even when location only says "Remote"
+    if re.search(
+        r"\b(amer|emea|apac|latam|mena|saarc|us only|uk only|"
+        r"based in|washington\s*dc)\b",
+        title,
+        flags=re.I,
+    ):
         return True
+    if COUNTRY_LOCKED_LOCATION.search(loc) and not has_worldwide_signal(
+        {**dict(row), "location": "Worldwide"}  # ignore loc when checking signal
+        if hasattr(row, "keys")
+        else row
+    ):
+        # If location names a country/region, treat as locked unless description
+        # clearly says worldwide/anywhere.
+        text = _text(row)
+        if not any(token in text for token in WORLDWIDE_TOKENS):
+            return True
     return False
 
 
