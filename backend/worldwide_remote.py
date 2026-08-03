@@ -94,10 +94,22 @@ def is_country_locked_remote(row: dict[str, Any] | pd.Series) -> bool:
         flags=re.I,
     ):
         return True
-    # Location names a country/region → locked unless description is explicitly worldwide
+    # Location names a country/region → locked unless description has a STRONG
+    # any-country phrase (bare "worldwide" in marketing copy is too weak).
     if COUNTRY_LOCKED_LOCATION.search(loc):
         desc = str(row.get("description") or "").lower()
-        if not any(token in desc for token in WORLDWIDE_TOKENS):
+        strong = (
+            "work from anywhere",
+            "candidates from anywhere",
+            "hire from anywhere",
+            "any country",
+            "all countries",
+            "remote worldwide",
+            "remotely from anywhere",
+            "location independent",
+            "no location requirement",
+        )
+        if not any(token in desc for token in strong):
             return True
     return False
 
