@@ -34,9 +34,11 @@ QUICK = os.getenv("HAUNSLA_SCRAPE_QUICK", "0") == "1"
 INDEED_RESULTS_PER_QUERY = _int_env(
     "INDEED_RESULTS_PER_QUERY", 100 if QUICK else 1500
 )
-ATS_RESULTS_WANTED = _int_env("ATS_RESULTS_WANTED", 200 if QUICK else 2500)
-GOOGLE_RESULTS_WANTED = _int_env("GOOGLE_RESULTS_WANTED", 50 if QUICK else 500)
+ATS_RESULTS_WANTED = _int_env("ATS_RESULTS_WANTED", 200 if QUICK else 10000)
+GOOGLE_RESULTS_WANTED = _int_env("GOOGLE_RESULTS_WANTED", 50 if QUICK else 1000)
 ATS_HOURS_OLD = _int_env("ATS_HOURS_OLD", 336)  # 14 days
+# Keyword-filter ATS boards (reduces volume). Off by default for bulk fills.
+ATS_KEYWORD_FILTER = os.getenv("ATS_KEYWORD_FILTER", "0") == "1"
 
 LISTED_JOB_SITES = ("ashby", "greenhouse", "lever", "hiringcafe", "indeed", "remotive", "weworkremotely", "bayt", "naukri")
 
@@ -70,11 +72,30 @@ INDEED_SEARCH_TERMS = (
     "content writer",
     "data",
     "product",
+    "devops",
+    "python",
+    "javascript",
+    "react",
+    "remote",
+    "fullstack",
+    "frontend",
+    "backend",
+    "qa",
+    "accountant",
+    "hr",
+    "recruiter",
+    "project manager",
+    "business analyst",
+    "ai",
+    "machine learning",
 )
 
 GOOGLE_SEARCH_TERMS = (
     "remote jobs Pakistan",
     "remote jobs worldwide",
+    "remote software engineer jobs",
+    "remote developer jobs",
+    "work from anywhere jobs",
 )
 
 
@@ -122,22 +143,36 @@ def scrape_indeed(
         if not df.empty:
             frames.append(df)
 
-    # Optional second pass: US Indeed remote → later filtered to worldwide-open
+    # Optional second pass: major Indeed locales → later filtered to open remote
     if os.getenv("SCRAPE_INDEED_INTL", "1") == "1":
-        intl_terms = search_terms[:2] if QUICK else ("", "software", "developer", "writer", "support")
-        for term in intl_terms:
-            logger.info("Indeed intl scrape term=%r country=USA", term)
-            df = _safe_scrape_jobs(
-                site_name=["indeed"],
-                search_term=term or None,
-                is_remote=True,
-                country_indeed="USA",
-                location="Remote",
-                results_wanted=min(wanted, 500 if not QUICK else 50),
-                verbose=0,
-            )
-            if not df.empty:
-                frames.append(df)
+        intl_terms = (
+            search_terms[:2]
+            if QUICK
+            else ("", "software", "engineer", "developer", "writer", "support", "data", "marketing")
+        )
+        intl_countries = (
+            [("USA", "Remote")]
+            if QUICK
+            else [
+                ("USA", "Remote"),
+                ("UK", "Remote"),
+                ("Canada", "Remote"),
+            ]
+        )
+        for country, loc in intl_countries:
+            for term in intl_terms:
+                logger.info("Indeed intl scrape term=%r country=%s", term, country)
+                df = _safe_scrape_jobs(
+                    site_name=["indeed"],
+                    search_term=term or None,
+                    is_remote=True,
+                    country_indeed=country,
+                    location=loc,
+                    results_wanted=min(wanted, 800 if not QUICK else 50),
+                    verbose=0,
+                )
+                if not df.empty:
+                    frames.append(df)
 
     if not frames:
         return pd.DataFrame()
@@ -270,7 +305,11 @@ def scrape_all(search_term: str = " ") -> pd.DataFrame:
     frames: list[pd.DataFrame] = []
 
     logger.info("Scraping ATS boards")
-    ats_terms = ATS_SEARCH_TERMS[:3] if QUICK else ATS_SEARCH_TERMS
+    if ATS_KEYWORD_FILTER:
+        ats_terms = ATS_SEARCH_TERMS[:3] if QUICK else ATS_SEARCH_TERMS
+    else:
+        # Keep all remote board roles (board-marked remote) for bulk fills
+        ats_terms = ("remote",)
     frames.append(scrape_ats(search_terms=ats_terms, results_wanted=ATS_RESULTS_WANTED))
 
     logger.info("Scraping Indeed")

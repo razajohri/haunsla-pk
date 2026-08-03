@@ -8,6 +8,7 @@ a pandas DataFrame with the same column shape JobSpy uses.
 from __future__ import annotations
 
 import logging
+import time
 from datetime import datetime, timezone
 from typing import Any
 
@@ -22,6 +23,7 @@ logger = logging.getLogger(__name__)
 USER_AGENT = "HaunslaBot/1.0 (+https://haunsla.pk)"
 SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": USER_AGENT, "Accept": "application/json"})
+ATS_REQUEST_DELAY_SEC = float(__import__("os").getenv("ATS_REQUEST_DELAY_SEC", "0.15"))
 
 
 def _now_date() -> str:

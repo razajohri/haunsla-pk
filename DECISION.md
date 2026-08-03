@@ -26,15 +26,16 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 ## ADR-002 — Supabase Postgres (prod) + SQLite (local)
 
 **Date:** 2026-08-03  
-**Status:** Accepted
+**Status:** Accepted (reconfirmed 2026-08-03 — Supabase is the production DB)
 
 **Context:** Need auth, Postgres, and storage without standing up infra day one. Local DX should work offline.
 
-**Decision:** SQLAlchemy models talk to `DATABASE_URL`. Local default = SQLite. Production = Supabase Postgres. Auth/Storage via Supabase when Week 3 lands. SQL migration kept in `backend/migrations/`.
+**Decision:** SQLAlchemy models talk to `DATABASE_URL`. Local default = SQLite. **Production = Supabase Postgres** (confirmed). Auth/Storage via Supabase when Week 3 lands. JobSpy pipeline upserts with `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`. Schema: `backend/db/schema.sql` (greenfield) or migrations `001`+`002`.
 
 **Consequences:**
 - Slight SQLite vs Postgres divergence (JSON types, etc.) — keep queries portable.
 - `create_all()` is fine for local; prod should apply SQL migration / migrate properly before launch.
+- Agents need Supabase service-role credentials in `backend/.env` (never commit) to upsert scraped jobs.
 
 ---
 

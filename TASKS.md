@@ -24,20 +24,20 @@ Agents: check items off when done; don’t invent parallel trackers.
 
 ## Week 1 — Backend hardens
 
-- [~] Supabase credentials in `backend/.env` / `mobile/.env` (gitignored)
-- [ ] Point `DATABASE_URL` at Haunsla Supabase project (direct host DNS failed locally — use pooler URI)
-- [ ] Apply `backend/migrations/001_initial.sql` on the **Haunsla** Supabase project (not the other linked MCP project)
-- [ ] Verify SQLAlchemy against Postgres (not only SQLite)
+- [~] Supabase credentials in `backend/.env` / `mobile/.env` (gitignored) — **prod DB = Supabase** (confirmed)
+- [ ] Point `DATABASE_URL` at Haunsla Supabase project (use pooler URI)
+- [ ] Apply `backend/db/schema.sql` (or `001`+`002`) on the **Haunsla** Supabase project
+- [ ] Verify SQLAlchemy / pipeline upsert against Postgres (not only SQLite)
 - [ ] Enable RLS + policies on Haunsla tables before exposing anon key broadly
 - [~] Schedule scrapers (APScheduler or platform cron) — pipeline scripts ready; cron/host wiring todo
 - [x] JobSpy pipeline port (scrape → pickle → Supabase upsert → link validate)
 - [x] Ashby / Greenhouse / Lever ATS scrapers + company slug config
 - [x] Indeed + Google Jobs via python-jobspy (PK / worldwide terms)
 - [x] Pakistan-friendly heuristic filter (`ats_location.py` — PK + open remote, reject US/EU-only)
-- [ ] Grow ATS company slug lists in `config/ats_companies.json`
+- [x] Grow ATS company slug lists in `config/ats_companies.json` (bulk remote-friendly seed)
 - [ ] Deploy API to Railway or Render
 - [ ] Health check + scrape webhook secured with secret
-- [ ] Run `scripts/update_jobs_cache.py` until ≥ 200 real jobs in DB
+- [~] Bulk scrape toward ≥ 10k remote jobs (cache locally; sync when Supabase keys present)
 - [ ] Optional: enable Bayt/Naukri (`SCRAPE_BAYT_NAUKRI=1`) and hiring.cafe
 
 ### Scraper priority
