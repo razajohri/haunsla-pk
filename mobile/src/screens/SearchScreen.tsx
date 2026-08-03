@@ -185,6 +185,13 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 0.6,
   },
+  hint: {
+    fontFamily: 'DMSans_400Regular',
+    fontSize: 13,
+    color: colors.inkMuted,
+    lineHeight: 18,
+    marginBottom: spacing.sm,
+  },
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {
     paddingHorizontal: 12,
