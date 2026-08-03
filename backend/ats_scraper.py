@@ -207,12 +207,26 @@ def scrape_ats(
     terms = [t.lower().strip() for t in (search_terms or ()) if t and t.strip()]
 
     rows: list[dict[str, Any]] = []
-    for slug in lists["greenhouse"]:
-        rows.extend(_fetch_greenhouse(slug))
-    for slug in lists["lever"]:
-        rows.extend(_fetch_lever(slug))
-    for slug in lists["ashby"]:
-        rows.extend(_fetch_ashby(slug))
+    board_plan = (
+        ("greenhouse", lists["greenhouse"], _fetch_greenhouse),
+        ("lever", lists["lever"], _fetch_lever),
+        ("ashby", lists["ashby"], _fetch_ashby),
+    )
+    for board, slugs, fetch_fn in board_plan:
+        logger.info("ATS %s: scraping %s companies", board, len(slugs))
+        for idx, slug in enumerate(slugs, start=1):
+            batch = fetch_fn(slug)
+            rows.extend(batch)
+            if idx % 25 == 0 or idx == len(slugs):
+                logger.info(
+                    "ATS %s progress %s/%s (rows so far %s)",
+                    board,
+                    idx,
+                    len(slugs),
+                    len(rows),
+                )
+            if ATS_REQUEST_DELAY_SEC > 0:
+                time.sleep(ATS_REQUEST_DELAY_SEC)
 
     if not rows:
         return pd.DataFrame()
