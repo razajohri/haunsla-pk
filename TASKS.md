@@ -40,6 +40,8 @@ Agents: check items off when done; don’t invent parallel trackers.
 - [x] Bulk scrape toward ≥ 10k remote jobs — peak **16,112** local; worldwide multi-source refresh also wired
 - [x] Diversified sources: company career boards + RemoteOK/Jobicy/Arbeitnow/Himalayas + multi-category WWR + LinkedIn + RepStack
 - [x] Worldwide/any-country filter (`WORLDWIDE_ONLY=1`, `worldwide_remote.py`)
+- [x] Internship + entry/junior/fresh-grad scrape terms (`SCRAPE_ENTRY_LEVEL=1`) + `experience_level` tagging
+- [x] Mobile Search experience chips include `internship`
 - [ ] Optional: enable Bayt/Naukri (`SCRAPE_BAYT_NAUKRI=1`) and hiring.cafe
 
 ### Scraper priority

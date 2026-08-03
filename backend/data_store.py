@@ -133,6 +133,20 @@ def build_job_record(row: dict[str, Any] | pd.Series) -> dict[str, Any] | None:
         if lo or hi:
             compensation = f"{currency} {lo}-{hi}".strip()
 
+    experience_level = row.get("experience_level")
+    if isinstance(experience_level, str):
+        experience_level = experience_level.strip().lower() or None
+    else:
+        experience_level = None
+
+    tags = row.get("tags")
+    if not isinstance(tags, list):
+        tags = ["Remote"]
+    if experience_level == "internship" and "Internship" not in tags:
+        tags = [*tags, "Internship"]
+    if experience_level == "entry" and "Entry Level" not in tags:
+        tags = [*tags, "Entry Level"]
+
     return {
         "source_key": source_key,
         "site": site,
@@ -146,6 +160,8 @@ def build_job_record(row: dict[str, Any] | pd.Series) -> dict[str, Any] | None:
         "max_amount": max_amount,
         "currency": currency,
         "job_type": row.get("job_type"),
+        "experience_level": experience_level,
+        "tags": tags,
         "job_url": str(job_url),
         "job_url_direct": str(job_url_direct) if job_url_direct else None,
         "date_posted": date_posted,
@@ -276,6 +292,16 @@ def _map_record_to_orm_fields(rec: dict[str, Any]) -> dict[str, Any]:
     if rec.get("site"):
         tags.append(str(rec["site"]).title())
 
+    exp = rec.get("experience_level")
+    if isinstance(exp, str):
+        exp = exp.strip().lower() or None
+    else:
+        exp = None
+    if exp == "internship" and "Internship" not in tags:
+        tags.append("Internship")
+    if exp == "entry" and "Entry Level" not in tags:
+        tags.append("Entry Level")
+
     return {
         "external_id": rec["source_key"],
         "source_key": rec["source_key"],
@@ -290,6 +316,7 @@ def _map_record_to_orm_fields(rec: dict[str, Any]) -> dict[str, Any]:
         "compensation": rec.get("compensation"),
         "pay_interval": rec.get("interval"),
         "job_type": jt,
+        "experience_level": exp,
         "salary_min": salary_min,
         "salary_max": salary_max,
         "salary_currency": rec.get("currency") or "USD",
@@ -365,7 +392,8 @@ def _record_to_api_job(rec: dict[str, Any], *, include_description: bool = False
         or (rec.get("raw_payload") or {}).get("logo_photo_url"),
         "apply_url": apply_url,
         "category": rec.get("category"),
-        "experience_level": rec.get("experience_level"),
+        "experience_level": rec.get("experience_level")
+        or (rec.get("raw_payload") or {}).get("experience_level"),
         "job_type": job_type,
         "salary_min": _as_int(rec.get("salary_min", rec.get("min_amount"))),
         "salary_max": _as_int(rec.get("salary_max", rec.get("max_amount"))),

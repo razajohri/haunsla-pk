@@ -10,7 +10,7 @@ from app.models import Job
 bp = Blueprint("jobs", __name__)
 
 CATEGORIES = {"tech", "design", "marketing", "writing", "support", "finance"}
-EXPERIENCE = {"entry", "mid", "senior"}
+EXPERIENCE = {"internship", "entry", "mid", "senior"}
 JOB_TYPES = {"full-time", "part-time", "contract", "freelance"}
 
 

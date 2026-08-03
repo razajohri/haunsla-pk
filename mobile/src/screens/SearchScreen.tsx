@@ -13,7 +13,7 @@ import { useAppStore } from '../store/appStore';
 import { colors, radius, spacing } from '../theme';
 
 const CATEGORIES = ['tech', 'design', 'marketing', 'writing', 'support', 'finance'];
-const EXPERIENCE = ['entry', 'mid', 'senior'];
+const EXPERIENCE = ['internship', 'entry', 'mid', 'senior'];
 const JOB_TYPES = ['full-time', 'part-time', 'contract', 'freelance'];
 const DATES = [
   { label: 'Today', value: 'today' },

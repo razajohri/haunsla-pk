@@ -71,6 +71,31 @@ ATS_SEARCH_TERMS = (
     "developer",
     "designer",
     "support",
+    # Fresh grads / early career
+    "intern",
+    "internship",
+    "junior",
+    "entry level",
+    "graduate",
+    "associate",
+)
+
+# Extra Indeed/LinkedIn terms aimed at fresh graduates
+ENTRY_LEVEL_SEARCH_TERMS = (
+    "internship",
+    "intern",
+    "junior",
+    "entry level",
+    "graduate",
+    "new grad",
+    "fresh graduate",
+    "junior developer",
+    "junior engineer",
+    "junior designer",
+    "associate",
+    "trainee",
+    "no experience",
+    "customer support entry",
 )
 
 INDEED_SEARCH_TERMS = (
@@ -105,6 +130,7 @@ INDEED_SEARCH_TERMS = (
     "business analyst",
     "ai",
     "machine learning",
+    *ENTRY_LEVEL_SEARCH_TERMS,
 )
 
 GOOGLE_SEARCH_TERMS = (
@@ -113,6 +139,11 @@ GOOGLE_SEARCH_TERMS = (
     "remote software engineer jobs",
     "remote developer jobs",
     "work from anywhere jobs",
+    "remote internship",
+    "remote junior developer",
+    "remote entry level jobs",
+    "remote graduate jobs",
+    "remote jobs for fresh graduates",
 )
 
 
@@ -225,9 +256,30 @@ def scrape_linkedin(results_wanted: int = 200) -> pd.DataFrame:
     if os.getenv("SCRAPE_LINKEDIN", "1") != "1":
         return pd.DataFrame()
     wanted = 40 if QUICK else results_wanted
-    terms = ("remote", "software engineer", "developer", "designer", "writer", "support")
+    terms = (
+        "remote",
+        "software engineer",
+        "developer",
+        "designer",
+        "writer",
+        "support",
+        "internship",
+        "junior developer",
+        "entry level",
+        "graduate",
+        "new grad",
+    )
     if QUICK:
-        terms = terms[:2]
+        terms = ("internship", "junior developer")
+    elif os.getenv("SCRAPE_ENTRY_LEVEL", "1") == "1":
+        # Prefer early-career LinkedIn queries; full list is very slow.
+        terms = (
+            "internship remote",
+            "junior developer remote",
+            "entry level remote",
+            "new grad remote",
+            "graduate remote",
+        )
     frames: list[pd.DataFrame] = []
     for term in terms:
         logger.info("LinkedIn scrape term=%r", term)
@@ -384,6 +436,24 @@ def scrape_all(search_term: str = " ") -> pd.DataFrame:
         frames.append(
             scrape_ats(search_terms=ats_terms, results_wanted=ATS_RESULTS_WANTED)
         )
+        # Second ATS pass: keep internship/junior/entry titles from career boards
+        if os.getenv("SCRAPE_ENTRY_LEVEL", "1") == "1":
+            logger.info("Scraping ATS boards for internship/junior/entry titles")
+            entry_terms = (
+                "intern",
+                "internship",
+                "junior",
+                "entry level",
+                "graduate",
+                "associate",
+                "trainee",
+            )
+            frames.append(
+                scrape_ats(
+                    search_terms=entry_terms[:3] if QUICK else entry_terms,
+                    results_wanted=ATS_RESULTS_WANTED,
+                )
+            )
 
     # 3) Remote-native aggregators (great for worldwide)
     if os.getenv("SCRAPE_REMOTE_BOARDS", "1") == "1":
@@ -402,6 +472,14 @@ def scrape_all(search_term: str = " ") -> pd.DataFrame:
     if os.getenv("SCRAPE_INDEED", "1") == "1":
         logger.info("Scraping Indeed")
         frames.append(scrape_indeed())
+        # Dedicated fresh-grad / internship pass (also covered in INDEED_SEARCH_TERMS)
+        if os.getenv("SCRAPE_ENTRY_LEVEL", "1") == "1":
+            logger.info("Scraping Indeed entry-level / internship terms")
+            frames.append(
+                scrape_indeed(
+                    terms=ENTRY_LEVEL_SEARCH_TERMS[:6] if QUICK else ENTRY_LEVEL_SEARCH_TERMS
+                )
+            )
 
     if os.getenv("SCRAPE_GOOGLE", "1") == "1":
         logger.info("Scraping Google Jobs")
@@ -437,6 +515,18 @@ def scrape_all(search_term: str = " ") -> pd.DataFrame:
     df = _prefer_direct_url(df)
     df = _dedupe_by_url(df)
     df = _filter_aggregator_jobs(df)
+
+    from experience_level import annotate_experience_levels, is_fresh_grad_friendly
+
+    df = annotate_experience_levels(df)
+    if not df.empty and "experience_level" in df.columns:
+        logger.info(
+            "Experience mix:\n%s",
+            df["experience_level"].fillna("unknown").value_counts().to_string(),
+        )
+        fresh = int(df.apply(is_fresh_grad_friendly, axis=1).sum())
+        logger.info("Fresh-grad friendly (internship/entry): %s", fresh)
+
     if "site" in df.columns:
         logger.info("Source mix:\n%s", df["site"].astype(str).str.lower().value_counts().to_string())
     logger.info("scrape_all kept %s jobs after filter/dedupe", len(df))

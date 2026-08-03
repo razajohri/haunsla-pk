@@ -171,6 +171,24 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 
 ---
 
+## ADR-011 — Fresh-grad / internship discovery
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Many Haunsla seekers (including the founding user) are fresh graduates. Pure mid/senior remote feeds bury internships and junior roles.
+
+**Decision:**
+- Default `SCRAPE_ENTRY_LEVEL=1` adds internship / junior / graduate / entry-level search terms across Indeed, LinkedIn (short list), Google, and ATS career boards.
+- Infer `experience_level` (`internship` | `entry` | `mid` | `senior`) from title/job_type first; avoid description-only “intern” matches (mentor-intern boilerplate).
+- Expose `internship` in API filters and mobile Search chips alongside entry/mid/senior.
+
+**Consequences:**
+- Heuristics will mis-tag some roles; title signals are preferred and can be tightened over time.
+- Fresh-grad volume still depends on source quality (Indeed job_type, ATS titles, WWR).
+
+---
+
 ## Pending decisions (not yet ADR’d)
 
 - Employer portal framework (Next.js vs plain Flask templates)
@@ -179,4 +197,4 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 - Primary deploy target: Railway vs Render
 - App store legal entity / privacy policy hosting
 
-When these are chosen, add ADR-011+.
+When these are chosen, add ADR-012+.

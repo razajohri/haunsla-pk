@@ -131,39 +131,46 @@ def scrape_remoteok() -> pd.DataFrame:
 
 def scrape_jobicy(count: int = 100) -> pd.DataFrame:
     rows: list[dict[str, Any]] = []
-    try:
-        resp = _session().get(
-            "https://jobicy.com/api/v2/remote-jobs",
-            params={"count": count},
-            timeout=40,
-        )
-        resp.raise_for_status()
-        jobs = (resp.json() or {}).get("jobs") or []
-    except Exception:
-        logger.exception("Jobicy scrape failed")
-        return pd.DataFrame()
-
-    for item in jobs:
-        url = item.get("url") or item.get("applicationLink") or ""
-        if not url:
-            continue
-        loc = item.get("jobGeo") or item.get("jobLocation") or "Worldwide"
-        rows.append(
-            _row(
-                site="jobicy",
-                title=item.get("jobTitle") or "",
-                company=item.get("companyName") or "",
-                job_url=url,
-                location=str(loc),
-                description=item.get("jobDescription") or "",
-                date_posted=(str(item.get("pubDate") or "")[:10] or None),
-                job_type=item.get("jobType")[0] if isinstance(item.get("jobType"), list) and item.get("jobType") else item.get("jobType"),
-                company_logo=item.get("companyLogo"),
-                salary_min=item.get("annualSalaryMin"),
-                salary_max=item.get("annualSalaryMax"),
-                currency=item.get("salaryCurrency") or "USD",
+    session = _session()
+    # Multiple tag queries — includes early-career friendly slices
+    tag_queries = (None, "software-dev", "marketing", "design", "customer-support")
+    for tag in tag_queries:
+        try:
+            params: dict[str, Any] = {"count": count}
+            if tag:
+                params["tag"] = tag
+            resp = session.get(
+                "https://jobicy.com/api/v2/remote-jobs",
+                params=params,
+                timeout=40,
             )
-        )
+            resp.raise_for_status()
+            jobs = (resp.json() or {}).get("jobs") or []
+        except Exception:
+            logger.exception("Jobicy scrape failed tag=%s", tag)
+            continue
+
+        for item in jobs:
+            url = item.get("url") or item.get("applicationLink") or ""
+            if not url:
+                continue
+            loc = item.get("jobGeo") or item.get("jobLocation") or "Worldwide"
+            rows.append(
+                _row(
+                    site="jobicy",
+                    title=item.get("jobTitle") or "",
+                    company=item.get("companyName") or "",
+                    job_url=url,
+                    location=str(loc),
+                    description=item.get("jobDescription") or "",
+                    date_posted=(str(item.get("pubDate") or "")[:10] or None),
+                    job_type=item.get("jobType")[0] if isinstance(item.get("jobType"), list) and item.get("jobType") else item.get("jobType"),
+                    company_logo=item.get("companyLogo"),
+                    salary_min=item.get("annualSalaryMin"),
+                    salary_max=item.get("annualSalaryMax"),
+                    currency=item.get("salaryCurrency") or "USD",
+                )
+            )
     logger.info("Jobicy: %s jobs", len(rows))
     return pd.DataFrame(rows)
 
