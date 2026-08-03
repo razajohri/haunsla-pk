@@ -40,7 +40,18 @@ ATS_HOURS_OLD = _int_env("ATS_HOURS_OLD", 336)  # 14 days
 # Keyword-filter ATS boards (reduces volume). Off by default for bulk fills.
 ATS_KEYWORD_FILTER = os.getenv("ATS_KEYWORD_FILTER", "0") == "1"
 
-LISTED_JOB_SITES = ("ashby", "greenhouse", "lever", "hiringcafe", "indeed", "remotive", "weworkremotely", "bayt", "naukri")
+LISTED_JOB_SITES = (
+    "ashby",
+    "greenhouse",
+    "lever",
+    "hiringcafe",
+    "indeed",
+    "remotive",
+    "weworkremotely",
+    "bayt",
+    "naukri",
+    "repstack",
+)
 
 ATS_SEARCH_TERMS = (
     "remote",
@@ -321,6 +332,15 @@ def scrape_all(search_term: str = " ") -> pd.DataFrame:
 
     frames.append(scrape_bayt_naukri())
     frames.append(scrape_legacy_boards())
+
+    if os.getenv("SCRAPE_REPSTACK", "1") == "1":
+        try:
+            from repstack_scraper import scrape_repstack
+
+            logger.info("Scraping RepStack careers")
+            frames.append(scrape_repstack())
+        except Exception:
+            logger.exception("RepStack scrape failed")
 
     if os.getenv("SCRAPE_HIRING_CAFE", "0") == "1":
         try:

@@ -31,6 +31,7 @@ LISTED_JOB_SITES = {
     "weworkremotely",
     "bayt",
     "naukri",
+    "repstack",
 }
 
 
