@@ -46,12 +46,18 @@ LISTED_JOB_SITES = (
     "lever",
     "hiringcafe",
     "indeed",
+    "linkedin",
     "remotive",
     "weworkremotely",
+    "remoteok",
+    "jobicy",
+    "arbeitnow",
+    "himalayas",
     "bayt",
     "naukri",
     "repstack",
 )
+WORLDWIDE_ONLY = os.getenv("WORLDWIDE_ONLY", "0") == "1"
 
 ATS_SEARCH_TERMS = (
     "remote",
@@ -214,6 +220,32 @@ def scrape_google(
     return pd.concat(frames, ignore_index=True)
 
 
+def scrape_linkedin(results_wanted: int = 200) -> pd.DataFrame:
+    """LinkedIn remote via JobSpy (another source beyond Indeed/Greenhouse)."""
+    if os.getenv("SCRAPE_LINKEDIN", "1") != "1":
+        return pd.DataFrame()
+    wanted = 40 if QUICK else results_wanted
+    terms = ("remote", "software engineer", "developer", "designer", "writer", "support")
+    if QUICK:
+        terms = terms[:2]
+    frames: list[pd.DataFrame] = []
+    for term in terms:
+        logger.info("LinkedIn scrape term=%r", term)
+        df = _safe_scrape_jobs(
+            site_name=["linkedin"],
+            search_term=term,
+            is_remote=True,
+            results_wanted=wanted,
+            hours_old=168,
+            verbose=0,
+        )
+        if not df.empty:
+            frames.append(df)
+    if not frames:
+        return pd.DataFrame()
+    return pd.concat(frames, ignore_index=True)
+
+
 def scrape_bayt_naukri(results_wanted: int = 200) -> pd.DataFrame:
     """Optional regional JobSpy boards (Bayt / Naukri)."""
     if os.getenv("SCRAPE_BAYT_NAUKRI", "0") != "1":
@@ -307,31 +339,76 @@ def _dedupe_by_url(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _filter_aggregator_jobs(df: pd.DataFrame) -> pd.DataFrame:
-    return filter_dataframe(df)
+    df = filter_dataframe(df)
+    if WORLDWIDE_ONLY:
+        from worldwide_remote import filter_worldwide
+
+        before = len(df)
+        df = filter_worldwide(df)
+        logger.info("Worldwide-only filter %s → %s", before, len(df))
+    return df
 
 
 def scrape_all(search_term: str = " ") -> pd.DataFrame:
-    """Full refresh scrape used by scripts/update_jobs_cache.py."""
+    """Full refresh scrape used by scripts/update_jobs_cache.py.
+
+    Diversified sources:
+    - Company career boards (Ashby/GH/Lever from worldwide_companies.json)
+    - Remote aggregators (RemoteOK, Jobicy, Arbeitnow, Himalayas)
+    - Remotive + multi-category We Work Remotely
+    - Indeed / Google / LinkedIn (JobSpy)
+    - RepStack (Pakistan remote staffing)
+    """
     del search_term  # Canada API accepted a dummy term; unused here
     frames: list[pd.DataFrame] = []
 
-    logger.info("Scraping ATS boards")
-    if ATS_KEYWORD_FILTER:
-        ats_terms = ATS_SEARCH_TERMS[:3] if QUICK else ATS_SEARCH_TERMS
-    else:
-        # Keep all remote board roles (board-marked remote) for bulk fills
-        ats_terms = ("remote",)
-    frames.append(scrape_ats(search_terms=ats_terms, results_wanted=ATS_RESULTS_WANTED))
+    # 1) Company → career page path (multi-ATS)
+    if os.getenv("SCRAPE_CAREER_BOARDS", "1") == "1":
+        try:
+            from career_boards import scrape_worldwide_career_boards
 
-    logger.info("Scraping Indeed")
-    frames.append(scrape_indeed())
+            logger.info("Scraping worldwide company career boards")
+            frames.append(
+                scrape_worldwide_career_boards(worldwide_only=WORLDWIDE_ONLY)
+            )
+        except Exception:
+            logger.exception("Career boards scrape failed")
+
+    # 2) Large ATS slug lists (existing Haunsla/Canada-style bulk)
+    if os.getenv("SCRAPE_ATS_BULK", "1") == "1":
+        logger.info("Scraping bulk ATS boards")
+        if ATS_KEYWORD_FILTER:
+            ats_terms = ATS_SEARCH_TERMS[:3] if QUICK else ATS_SEARCH_TERMS
+        else:
+            ats_terms = ("remote",)
+        frames.append(
+            scrape_ats(search_terms=ats_terms, results_wanted=ATS_RESULTS_WANTED)
+        )
+
+    # 3) Remote-native aggregators (great for worldwide)
+    if os.getenv("SCRAPE_REMOTE_BOARDS", "1") == "1":
+        try:
+            from remote_boards import scrape_remote_boards
+
+            logger.info("Scraping RemoteOK / Jobicy / Arbeitnow / Himalayas")
+            frames.append(scrape_remote_boards())
+        except Exception:
+            logger.exception("Remote boards scrape failed")
+
+    # 4) Legacy Remotive + WWR (multi-category)
+    frames.append(scrape_legacy_boards())
+
+    # 5) JobSpy aggregators
+    if os.getenv("SCRAPE_INDEED", "1") == "1":
+        logger.info("Scraping Indeed")
+        frames.append(scrape_indeed())
 
     if os.getenv("SCRAPE_GOOGLE", "1") == "1":
         logger.info("Scraping Google Jobs")
         frames.append(scrape_google())
 
+    frames.append(scrape_linkedin())
     frames.append(scrape_bayt_naukri())
-    frames.append(scrape_legacy_boards())
 
     if os.getenv("SCRAPE_REPSTACK", "1") == "1":
         try:
@@ -359,7 +436,8 @@ def scrape_all(search_term: str = " ") -> pd.DataFrame:
     df = pd.concat(nonempty, ignore_index=True)
     df = _prefer_direct_url(df)
     df = _dedupe_by_url(df)
-    # Google is scraped into cache but not served (Canada pattern); keep in pickle
     df = _filter_aggregator_jobs(df)
+    if "site" in df.columns:
+        logger.info("Source mix:\n%s", df["site"].astype(str).str.lower().value_counts().to_string())
     logger.info("scrape_all kept %s jobs after filter/dedupe", len(df))
     return df
