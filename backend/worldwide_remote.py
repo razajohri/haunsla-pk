@@ -42,9 +42,10 @@ COUNTRY_LOCKED_LOCATION = re.compile(
     r"canada|australia|germany|france|india|brazil|mexico|"
     r"netherlands|ireland|spain|italy|sweden|norway|denmark|"
     r"switzerland|poland|estonia|colombia|argentina|japan|"
+    r"philippines|thailand|vietnam|indonesia|nigeria|kenya|"
     r"uae|united arab emirates|saudi arabia|ksa|singapore|"
     r"north america|emea|apac|latam|americas|\bamer\b|mena|meta|"
-    r"washington|bangalore|bengaluru|india"
+    r"washington|bangalore|bengaluru"
     r")\b",
     flags=re.I,
 )
@@ -94,9 +95,12 @@ def is_country_locked_remote(row: dict[str, Any] | pd.Series) -> bool:
         flags=re.I,
     ):
         return True
-    # Location names a country/region → locked unless description has a STRONG
-    # any-country phrase (bare "worldwide" in marketing copy is too weak).
-    if COUNTRY_LOCKED_LOCATION.search(loc):
+    # Location or title names a country/region → locked unless description has a
+    # STRONG any-country phrase (bare "worldwide" in marketing copy is too weak).
+    if COUNTRY_LOCKED_LOCATION.search(loc) or COUNTRY_LOCKED_LOCATION.search(title):
+        # Don't lock Haunsla's Pakistan roles
+        if "pakistan" in loc or "pakistan" in title.lower():
+            return False
         desc = str(row.get("description") or "").lower()
         strong = (
             "work from anywhere",
