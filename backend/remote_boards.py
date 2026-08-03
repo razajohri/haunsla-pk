@@ -69,6 +69,13 @@ def _row(
 
 
 def scrape_remoteok() -> pd.DataFrame:
+    """RemoteOK public API — currently noisy/spammy; off unless SCRAPE_REMOTEOK=1."""
+    import os
+
+    if os.getenv("SCRAPE_REMOTEOK", "0") != "1":
+        logger.info("RemoteOK skipped (set SCRAPE_REMOTEOK=1 to enable)")
+        return pd.DataFrame()
+
     try:
         resp = _session().get("https://remoteok.com/api", timeout=40)
         resp.raise_for_status()
@@ -77,14 +84,22 @@ def scrape_remoteok() -> pd.DataFrame:
         logger.exception("RemoteOK scrape failed")
         return pd.DataFrame()
 
+    job_words = (
+        "engineer", "developer", "designer", "manager", "analyst", "specialist",
+        "director", "lead", "support", "writer", "marketer", "recruiter",
+        "consultant", "architect", "scientist", "officer", "associate",
+    )
     rows: list[dict[str, Any]] = []
     for item in payload:
         if not isinstance(item, dict):
             continue
-        # First payload row is legal/meta; real jobs have numeric ids + company + tags.
         if not item.get("id") or not item.get("company") or not item.get("position"):
             continue
-        if not item.get("epoch") or not isinstance(item.get("tags"), list) or not item.get("tags"):
+        tags = item.get("tags") if isinstance(item.get("tags"), list) else []
+        if not item.get("epoch") or not tags or len(tags) > 10:
+            continue
+        description = str(item.get("description") or "")
+        if len(description) < 120:
             continue
         apply_url = item.get("apply_url") or item.get("url") or ""
         if apply_url and apply_url.startswith("/"):
@@ -92,7 +107,8 @@ def scrape_remoteok() -> pd.DataFrame:
         if not apply_url or not str(apply_url).startswith("http"):
             continue
         title = str(item.get("position") or "")
-        if len(title) < 3 or title.lower() in {"menu", "compatibility"}:
+        title_l = title.lower()
+        if len(title) < 6 or not any(word in title_l for word in job_words):
             continue
         loc = item.get("location") or "Worldwide"
         rows.append(
@@ -102,7 +118,7 @@ def scrape_remoteok() -> pd.DataFrame:
                 company=item.get("company") or "",
                 job_url=apply_url,
                 location=str(loc),
-                description=item.get("description") or "",
+                description=description,
                 date_posted=(str(item.get("date") or "")[:10] or None),
                 company_logo=item.get("company_logo"),
                 salary_min=item.get("salary_min"),

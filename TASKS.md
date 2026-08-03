@@ -37,7 +37,9 @@ Agents: check items off when done; don’t invent parallel trackers.
 - [x] Grow ATS company slug lists in `config/ats_companies.json` (bulk remote-friendly seed)
 - [ ] Deploy API to Railway or Render
 - [ ] Health check + scrape webhook secured with secret
-- [x] Bulk scrape toward ≥ 10k remote jobs — **16,112** in `jobs_cache.pkl` / local SQLite (sync to Supabase when keys present)
+- [x] Bulk scrape toward ≥ 10k remote jobs — peak **16,112** local; worldwide multi-source refresh also wired
+- [x] Diversified sources: company career boards + RemoteOK/Jobicy/Arbeitnow/Himalayas + multi-category WWR + LinkedIn + RepStack
+- [x] Worldwide/any-country filter (`WORLDWIDE_ONLY=1`, `worldwide_remote.py`)
 - [ ] Optional: enable Bayt/Naukri (`SCRAPE_BAYT_NAUKRI=1`) and hiring.cafe
 
 ### Scraper priority
