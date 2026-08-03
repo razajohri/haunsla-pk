@@ -26,15 +26,16 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 ## ADR-002 — Supabase Postgres (prod) + SQLite (local)
 
 **Date:** 2026-08-03  
-**Status:** Accepted
+**Status:** Accepted (reconfirmed 2026-08-03 — Supabase is the production DB)
 
 **Context:** Need auth, Postgres, and storage without standing up infra day one. Local DX should work offline.
 
-**Decision:** SQLAlchemy models talk to `DATABASE_URL`. Local default = SQLite. Production = Supabase Postgres. Auth/Storage via Supabase when Week 3 lands. SQL migration kept in `backend/migrations/`.
+**Decision:** SQLAlchemy models talk to `DATABASE_URL`. Local default = SQLite. **Production = Supabase Postgres** (confirmed). Auth/Storage via Supabase when Week 3 lands. JobSpy pipeline upserts with `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`. Schema: `backend/db/schema.sql` (greenfield) or migrations `001`+`002`.
 
 **Consequences:**
 - Slight SQLite vs Postgres divergence (JSON types, etc.) — keep queries portable.
 - `create_all()` is fine for local; prod should apply SQL migration / migrate properly before launch.
+- Agents need Supabase service-role credentials in `backend/.env` (never commit) to upsert scraped jobs.
 
 ---
 
@@ -149,6 +150,101 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 
 ---
 
+## ADR-010 — JobSpy scrape → pickle → Supabase pipeline (from remotejobscanada.ca)
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Haunsla needs the same job supply stack as remotejobscanada.ca: JobSpy aggregators, ATS board scrapes, atomic pickle cache, chunked Supabase upsert on `source_key`, and dead-link soft-deactivation. Geography must be Pakistan + open international remote (looser than Canada).
+
+**Decision:**
+- Port the Canada playbook into `backend/` (`scraper.py`, `ats_location.py`, `ats_companies.py`, `data_store.py`, `scripts/*`, `db/schema.sql`).
+- Use `python-jobspy` for Indeed/Google/(optional Bayt/Naukri). Implement Ashby/Greenhouse/Lever via public board APIs (`ats_scraper.py`) because public JobSpy lacks those boards.
+- Keep Remotive/WWR as additional sources mapped into the same DataFrame shape.
+- Upsert on `source_key`; serve Supabase first, then `jobs_cache.pkl`; map rows to the existing mobile JSON shape.
+- Pakistan filter lives in `ats_location.is_pakistan_job_row` (reject US/EU-only; allow PK + worldwide/anywhere remote).
+
+**Consequences:**
+- Scrape ops are script-driven (`update_jobs_cache.py`) plus `POST /api/jobs/scrape`.
+- Company coverage for ATS depends on `ats_companies.py` + `config/ats_companies.json` — grow the slug lists over time.
+- Cross-source dedupe remains URL/`source_key` based (same job on two boards may still appear twice).
+
+---
+
+## ADR-011 — Fresh-grad / internship discovery
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Many Haunsla seekers (including the founding user) are fresh graduates. Pure mid/senior remote feeds bury internships and junior roles.
+
+**Decision:**
+- Default `SCRAPE_ENTRY_LEVEL=1` adds internship / junior / graduate / entry-level search terms across Indeed, LinkedIn (short list), Google, and ATS career boards.
+- Infer `experience_level` (`internship` | `entry` | `mid` | `senior`) from title/job_type first; avoid description-only “intern” matches (mentor-intern boilerplate).
+- Expose `internship` in API filters and mobile Search chips alongside entry/mid/senior.
+
+**Consequences:**
+- Heuristics will mis-tag some roles; title signals are preferred and can be tightened over time.
+- Fresh-grad volume still depends on source quality (Indeed job_type, ATS titles, WWR).
+
+---
+
+## ADR-012 — Pakistan city employer list (LHE / KHI / ISB)
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Fresh graduates need roles from major employers in Lahore, Karachi, and Islamabad — including banks and graduate trainee programs — not only worldwide remote boards. Many PK employers lack public Greenhouse/Ashby/Lever boards.
+
+**Decision:**
+- Maintain `config/pakistan_companies.json` (200+ employers across tech, business, marketing, finance, banks).
+- Scrape via Indeed/Google city×field and per-company graduate/intern/trainee queries (`pakistan_companies.py`), plus ATS when `ats`+`slug` exist.
+- Default `ALLOW_PAKISTAN_LOCAL=1` so on-site/hybrid PK city jobs are kept alongside remote.
+- Document all toggles in `backend/SCRAPERS.md` for re-runs.
+
+**Consequences:**
+- Full company pass is Indeed-heavy; use `PK_COMPANY_LIMIT` / `HAUNSLA_SCRAPE_QUICK` for shorter runs.
+- Grow the JSON over time; optional ATS slugs improve direct career-page coverage.
+
+---
+
+## ADR-013 — Remote ads for growth; internships for Pakistan grads
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Haunsla will mostly run **remote job ads** to acquire users. Many of those users — especially fresh graduates — also need normal/local roles: they have FYP projects, rarely have internships, and don’t know how to get a first job in tech/business/marketing/finance.
+
+**Decision:**
+- Keep **remote-first** as the brand and acquisition story (*Remote jobs. Real ambition.*).
+- Keep scraping + filters for **internships / entry / trainee** and Pakistan city employers (ADR-011, ADR-012) so grads can find first steps without prior experience.
+- Onboarding lets seekers pick Remote / Internships / First job so the feed isn’t only senior remote roles.
+- Employer ads stay remote-heavy for monetization; seeker value includes local graduate discovery.
+
+**Consequences:**
+- Feed is mixed (remote + PK local) when `ALLOW_PAKISTAN_LOCAL=1`; Search chips + onboarding path keep UX clear.
+- Do not turn Haunsla into a full Rozee clone — remote remains the hero; internships/first jobs are the fresh-grad lane.
+
+---
+
+## ADR-014 — Direct company career-page scraping
+
+**Date:** 2026-08-03  
+**Status:** Accepted
+
+**Context:** Aggregator dumps are noisy. Users and ads need real apply links from company career pages (GitLab, 10Pearls, i2c, Tkxel, banks, etc.).
+
+**Decision:**
+- Maintain `config/career_pages.json` with `careers_url` and optional `ats`/`slug`.
+- `career_page_scraper.py`: explicit ATS → detect Greenhouse/Ashby/Lever embeds → site parsers (e.g. i2c ajax) → HTML job-link parse (+ one hop).
+- Run via `scripts/scrape_career_pages.py` or `scrape_all` (`SCRAPE_CAREER_PAGES=1`).
+
+**Consequences:**
+- Some corporate portals (Workday/SAP/Oracle) need bespoke parsers over time.
+- Grow `career_pages.json` whenever a good careers URL is found.
+
+---
+
 ## Pending decisions (not yet ADR’d)
 
 - Employer portal framework (Next.js vs plain Flask templates)
@@ -157,4 +253,4 @@ Format: **ADR-XXX — Title** → Context → Decision → Consequences.
 - Primary deploy target: Railway vs Render
 - App store legal entity / privacy policy hosting
 
-When these are chosen, add ADR-010+.
+When these are chosen, add ADR-015+.

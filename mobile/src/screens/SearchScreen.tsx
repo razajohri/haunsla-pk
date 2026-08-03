@@ -13,7 +13,12 @@ import { useAppStore } from '../store/appStore';
 import { colors, radius, spacing } from '../theme';
 
 const CATEGORIES = ['tech', 'design', 'marketing', 'writing', 'support', 'finance'];
-const EXPERIENCE = ['entry', 'mid', 'senior'];
+const EXPERIENCE: { value: string; label: string }[] = [
+  { value: 'internship', label: 'Internships' },
+  { value: 'entry', label: 'First job' },
+  { value: 'mid', label: 'Mid' },
+  { value: 'senior', label: 'Senior' },
+];
 const JOB_TYPES = ['full-time', 'part-time', 'contract', 'freelance'];
 const DATES = [
   { label: 'Today', value: 'today' },
@@ -84,16 +89,20 @@ export function SearchScreen() {
         </View>
 
         <Text style={styles.section}>Experience</Text>
+        <Text style={styles.hint}>
+          Fresh grads: start with Internships or First job — FYP counts as a start.
+        </Text>
         <View style={styles.row}>
           {EXPERIENCE.map((e) => (
             <Chip
-              key={e}
-              label={e}
-              active={filters.experience === e}
+              key={e.value}
+              label={e.label}
+              active={filters.experience === e.value}
               onPress={() =>
                 setFilters({
                   ...filters,
-                  experience: filters.experience === e ? undefined : e,
+                  experience:
+                    filters.experience === e.value ? undefined : e.value,
                 })
               }
             />
@@ -175,6 +184,13 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
     textTransform: 'uppercase',
     letterSpacing: 0.6,
+  },
+  hint: {
+    fontFamily: 'DMSans_400Regular',
+    fontSize: 13,
+    color: colors.inkMuted,
+    lineHeight: 18,
+    marginBottom: spacing.sm,
   },
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {

@@ -24,28 +24,44 @@ Agents: check items off when done; don’t invent parallel trackers.
 
 ## Week 1 — Backend hardens
 
-- [~] Supabase credentials in `backend/.env` / `mobile/.env` (gitignored)
-- [ ] Point `DATABASE_URL` at Haunsla Supabase project (direct host DNS failed locally — use pooler URI)
-- [ ] Apply `backend/migrations/001_initial.sql` on the **Haunsla** Supabase project (not the other linked MCP project)
-- [ ] Verify SQLAlchemy against Postgres (not only SQLite)
+- [~] Supabase credentials in `backend/.env` / `mobile/.env` (gitignored) — **prod DB = Supabase** (confirmed)
+- [ ] Point `DATABASE_URL` at Haunsla Supabase project (use pooler URI)
+- [ ] Apply `backend/db/schema.sql` (or `001`+`002`) on the **Haunsla** Supabase project
+- [ ] Verify SQLAlchemy / pipeline upsert against Postgres (not only SQLite)
 - [ ] Enable RLS + policies on Haunsla tables before exposing anon key broadly
-- [ ] Schedule scrapers (APScheduler or platform cron)
-- [ ] Add Ashby parser (high-value ATS)
-- [ ] Pakistan-friendly heuristic filter (timezone / worldwide / PK keywords)
+- [~] Schedule scrapers (APScheduler or platform cron) — pipeline scripts ready; cron/host wiring todo
+- [x] JobSpy pipeline port (scrape → pickle → Supabase upsert → link validate)
+- [x] Ashby / Greenhouse / Lever ATS scrapers + company slug config
+- [x] Indeed + Google Jobs via python-jobspy (PK / worldwide terms)
+- [x] Pakistan-friendly heuristic filter (`ats_location.py` — PK + open remote, reject US/EU-only)
+- [x] Grow ATS company slug lists in `config/ats_companies.json` (bulk remote-friendly seed)
 - [ ] Deploy API to Railway or Render
 - [ ] Health check + scrape webhook secured with secret
-- [ ] Seed / scrape until ≥ 200 real jobs in DB
+- [x] Bulk scrape toward ≥ 10k remote jobs — peak **16,112** local; worldwide multi-source refresh also wired
+- [x] Diversified sources: company career boards + RemoteOK/Jobicy/Arbeitnow/Himalayas + multi-category WWR + LinkedIn + RepStack
+- [x] Worldwide/any-country filter (`WORLDWIDE_ONLY=1`, `worldwide_remote.py`)
+- [x] Internship + entry/junior/fresh-grad scrape terms (`SCRAPE_ENTRY_LEVEL=1`) + `experience_level` tagging
+- [x] Mobile Search experience chips include `internship`
+- [x] Pakistan employer list (LHE/KHI/ISB) + banks/tech/biz/marketing/finance scraper (`pakistan_companies.json`)
+- [x] Scraper runbook (`backend/SCRAPERS.md`) for re-running all sources later
+- [x] Product dual path: remote ads for growth + internships/first jobs for PK fresh grads (onboarding + Search)
+- [x] Direct company career-page scraper (`career_page_scraper.py` + `config/career_pages.json`)
+- [ ] Optional: enable Bayt/Naukri (`SCRAPE_BAYT_NAUKRI=1`) and hiring.cafe
 
 ### Scraper priority
 | Source | Priority | Status |
 |--------|----------|--------|
 | Remotive | High | [x] |
 | We Work Remotely | High | [x] |
+| Indeed (JobSpy) | High | [x] |
+| Google Jobs (JobSpy) | High | [x] (into cache; excluded from LISTED_JOB_SITES like Canada) |
+| Ashby | High | [x] |
+| Greenhouse | High | [x] |
+| Lever | High | [x] |
+| hiring.cafe | Medium | [~] opt-in |
+| Bayt / Naukri | Medium | [~] opt-in |
 | Wellfound | High | [ ] |
 | LinkedIn Remote | High | [ ] |
-| Ashby | Medium | [ ] |
-| Greenhouse | Medium | [ ] |
-| Lever | Medium | [ ] |
 | Rozee.pk | Medium | [ ] |
 | Jobillico | Low | [ ] |
 

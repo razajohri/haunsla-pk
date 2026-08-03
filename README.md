@@ -28,10 +28,26 @@ py run.py
 
 API runs at `http://localhost:5000`. Demo jobs are seeded automatically.
 
+**Job supply pipeline** (same shape as remotejobscanada.ca, PK/worldwide geo):
+
+```bash
+cd backend
+# Full refresh: ATS + Indeed + Google (+ Remotive/WWR) → pickle → Supabase → link check
+python scripts/update_jobs_cache.py
+
+# Or cache → Supabase only
+python scripts/sync_jobs_to_supabase.py
+
+# Apply Canada-shaped schema on Supabase/Postgres
+python scripts/apply_schema.py
+```
+
+Set `HAUNSLA_SCRAPE_QUICK=1` for smaller local smoke runs. ATS company slugs live in `backend/config/ats_companies.json`.
+
 Key endpoints:
-- `GET /api/jobs` — feed / search / filters
+- `GET /api/jobs` — feed / search / filters (Supabase → pickle → SQLAlchemy)
 - `GET /api/jobs/:id` — job detail
-- `POST /api/jobs/scrape` — run Remotive + We Work Remotely scrapers
+- `POST /api/jobs/scrape` — JobSpy PK pipeline (`{"legacy": true}` for Remotive/WWR only)
 - `GET|POST /api/saved` — saved jobs
 - `GET|POST /api/alerts` — job alerts
 - `POST /api/employers/listings` — employer posts
@@ -52,8 +68,8 @@ On a physical device, use your machine's LAN IP instead of localhost.
 | Layer | Tech |
 |-------|------|
 | Mobile | Expo, React Navigation, React Query, Zustand, FlashList |
-| Backend | Flask, SQLAlchemy, APScheduler scrapers |
-| DB | SQLite (local) → Supabase PostgreSQL (prod) |
+| Backend | Flask, SQLAlchemy, JobSpy pipeline, ATS scrapers |
+| DB | SQLite (local) → Supabase PostgreSQL (prod) + `jobs_cache.pkl` |
 | Payments | JazzCash / EasyPaisa (employer), RevenueCat (premium — later) |
 
 ## MVP roadmap
